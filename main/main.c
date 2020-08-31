@@ -278,6 +278,7 @@ float adc_measured_voltage1(int adc_measured_counts){
 int span_pct_integer(int adc_measured_counts){
   int span_percent;
   span_percent = (int) (adc_measured_voltage1(adc_measured_counts)*30.3);
+	span_percent = (float) span_percent * -2.703 + 191.89 + .5;
   if (span_percent < 0){
     span_percent = 0;
   }
@@ -285,10 +286,11 @@ int span_pct_integer(int adc_measured_counts){
     span_percent = 100;
     }
   }
+
   return span_percent;
 }
 
-void span_pct_string(int adc_measured_counts, char *span){
+void span_pct_string(int adc_measured_counts, char* span){
     sprintf(span,"%3d", span_pct_integer(adc_measured_counts));
     return;
 }
