@@ -55,9 +55,11 @@ void init_ADC(){
   gpio_num_t adc_gpio_num;
 
   r = adc1_pad_get_io_num( ADC1_EXAMPLE_CHANNEL, &adc_gpio_num );
-  assert( r == ESP_OK );
-  ESP_LOGI(tag, "ADC1 channel %d @ GPIO %d \n", ADC1_EXAMPLE_CHANNEL, adc_gpio_num);
-
+  if ( r == ESP_OK ){
+    ESP_LOGI(tag, "ADC1 channel %d @ GPIO %d \n", ADC1_EXAMPLE_CHANNEL, adc_gpio_num);
+  } else {
+    ESP_LOGE(tag, "ADC failed to get I/O number code: 0x%.2X",r);
+  }
 
   adc1_config_width(ADC_WIDTH_BIT_12);
   adc1_config_channel_atten( ADC1_EXAMPLE_CHANNEL, ADC_ATTEN_DB_11 ); //0 to 3.9VDC
@@ -71,9 +73,12 @@ void init_DAC(){
   gpio_num_t dac_gpio_num;
 
   r = dac_pad_get_io_num( DAC_EXAMPLE_CHANNEL, &dac_gpio_num );
-  assert( r == ESP_OK );
+  if ( r == ESP_OK ){
+    ESP_LOGI(tag, "DAC channel %d @ GPIO %d.\n", DAC_EXAMPLE_CHANNEL + 1, dac_gpio_num );
+  } else {
+    ESP_LOGE(tag, "DAC failed to get I/O number code: 0x%.2X",r);
+  }
 
-  ESP_LOGI(tag, "DAC channel %d @ GPIO %d.\n", DAC_EXAMPLE_CHANNEL + 1, dac_gpio_num );
   dac_output_enable( DAC_EXAMPLE_CHANNEL );
 }
 
