@@ -1,6 +1,3 @@
-#ifndef OLED_FONT8X8_BASIC_H
-#define OLED_FONT8X8_BASIC_H
-
 /**
  * @file font8x8_basic.h
  * @brief Set of 8bit x 8bit fonts for ASCI characters.
@@ -22,6 +19,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
+
+#ifndef OLED_FONT8X8_BASIC_H
+#define OLED_FONT8X8_BASIC_H
 
 /*
    Constant: font8x8_basic_tr
