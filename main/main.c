@@ -141,7 +141,7 @@ void app_main(void) {
 
 	while(1) {
 		// test external components
-		 	myPrintf1( 2 ); //this function shows activity on the monitor..remove programming complete
+		 	//myPrintf1( 2 ); //this function shows activity on the monitor..remove programming complete
 
 			dac_output_voltage( DAC_EXAMPLE_CHANNEL, dac_set_point );
 			adc_measured_counts = adc1_get_raw( ADC1_EXAMPLE_CHANNEL);
