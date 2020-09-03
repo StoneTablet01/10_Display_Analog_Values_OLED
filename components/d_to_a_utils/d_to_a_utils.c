@@ -26,3 +26,8 @@ float dac_set_voltage(int dac_set_point){
     dac_output_vdc = dac_set_point * 0.01289063;
     return dac_output_vdc;
 }
+
+void set_dac_output_voltage( int dac_channel, uint8_t dac_set_point ){
+  dac_output_voltage( dac_channel, dac_set_point );
+  return;
+}

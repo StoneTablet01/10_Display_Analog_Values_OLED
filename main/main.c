@@ -46,6 +46,7 @@
 
 #define tag "SSD1306"
 
+/*
 float adc_measured_voltage1(int adc_measured_counts){
     float adc_input_vdc;
     adc_input_vdc = adc_measured_counts * 0.000952; // 3.9 divided by 4096
@@ -70,56 +71,34 @@ void span_pct_string(int adc_measured_counts, char* span){
     sprintf(span,"%3d", span_pct_integer(adc_measured_counts));
     return;
 }
+*/
 
 void app_main(void) {
 	uint8_t dac_set_point=0;
-	int adc_measured_counts=0;
 
 	char span[4] = "";
 	char oled_message [32] ="";
 
 	init_ADC(ADC1_EXAMPLE_CHANNEL);
 	init_DAC(DAC_EXAMPLE_CHANNEL);
-
 	vTaskDelay(2 * portTICK_PERIOD_MS); //2 port ticks == 1/50 sec
-
-	//ESP_LOGI(tag, "start conversion.\n");
-	//printf("  DAC Count    DAC VDC  ADC Count    ADC VDC   Span PCT"
-	//"   Digit[0]   Digit[1]   Digit[2]\n");
 
 	i2c_master_init(SDA_PIN, SCL_PIN);
 	ssd1306_init();
 	oled_display_clear();
 
-
 	char str[] = "\n\n\n\n\n\n\n\nX";
 	oled_display_text(str);
-	//oled_display_scroll();
 
 	while(1) {
-		// test external components
-		 	//myPrintf1( 2 ); //this function shows activity on the monitor..remove programming complete
 
-			dac_output_voltage( DAC_EXAMPLE_CHANNEL, dac_set_point );
-			adc_measured_counts = adc1_get_raw( ADC1_EXAMPLE_CHANNEL);
-
-			span_pct_string(adc_measured_counts,span);
-			/*
-			printf("%11d %10.2f %10d %10.2f %10d %10c %10c %10c\n",
-			dac_set_point, // 0 to 256 is the input range of the DAC
-			dac_set_voltage(dac_set_point), //Calculated output voltage from the DAC
-			adc_measured_counts, // input counts measured by ADC range is 0 to 4096
-			adc_measured_voltage1(adc_measured_counts), //Calculated ADC voltage
-			span_pct_integer(adc_measured_counts), //Span (0-100) recorded by ADC integer
-			span[0], span[1], span[2]); //Span (0-100) recorded by ADC as string
-			*/
-
+			set_dac_output_voltage( DAC_EXAMPLE_CHANNEL, dac_set_point );
+			get_span_pct_string(ADC1_EXAMPLE_CHANNEL,span);
 			dac_set_point++;
 
 			strcpy(oled_message, "  Stone Tablet  \n\nMoisture ");
 			strcat(oled_message,span);
 			strcat(oled_message," %");
-
 			oled_display_text(oled_message);
 
 			vTaskDelay( 2 * portTICK_PERIOD_MS );
