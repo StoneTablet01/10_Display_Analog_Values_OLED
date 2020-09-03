@@ -39,6 +39,8 @@
 //#include "oled_ssd1306.h"
 //#include "font8x8_basic.h"
 #include "oled_1306.h" // driver and functions for OLED Display
+#include "a_to_d_utils.h" // driver and functions for Analog to Digital Converter
+#include "d_to_a_utils.h" // driver and functions for Analog to Digital Converter
 
 #define SDA_PIN GPIO_NUM_21 // serial data line old value 18
 #define SCL_PIN GPIO_NUM_22 // serial clock line old value 19
@@ -46,41 +48,6 @@
 #define ADC1_EXAMPLE_CHANNEL    CONFIG_EXAMPLE_ADC1_CHANNEL
 
 #define tag "SSD1306"
-
-
-void init_ADC(){
-  ESP_LOGI(tag, "Initialize Analag to Digital Converter 1");
-
-  esp_err_t r;
-  gpio_num_t adc_gpio_num;
-
-  r = adc1_pad_get_io_num( ADC1_EXAMPLE_CHANNEL, &adc_gpio_num );
-  if ( r == ESP_OK ){
-    ESP_LOGI(tag, "ADC1 channel %d @ GPIO %d \n", ADC1_EXAMPLE_CHANNEL, adc_gpio_num);
-  } else {
-    ESP_LOGE(tag, "ADC failed to get I/O number code: 0x%.2X",r);
-  }
-
-  adc1_config_width(ADC_WIDTH_BIT_12);
-  adc1_config_channel_atten( ADC1_EXAMPLE_CHANNEL, ADC_ATTEN_DB_11 ); //0 to 3.9VDC
-}
-
-void init_DAC(){
-
-  ESP_LOGI(tag, "Initialize Digital to Analog Converter");
-
-  esp_err_t r;
-  gpio_num_t dac_gpio_num;
-
-  r = dac_pad_get_io_num( DAC_EXAMPLE_CHANNEL, &dac_gpio_num );
-  if ( r == ESP_OK ){
-    ESP_LOGI(tag, "DAC channel %d @ GPIO %d.\n", DAC_EXAMPLE_CHANNEL + 1, dac_gpio_num );
-  } else {
-    ESP_LOGE(tag, "DAC failed to get I/O number code: 0x%.2X",r);
-  }
-
-  dac_output_enable( DAC_EXAMPLE_CHANNEL );
-}
 
 float dac_set_voltage(int dac_set_point){
     float dac_output_vdc; //DAC output volts DC (0-3.3 VDC)
@@ -121,8 +88,8 @@ void app_main(void) {
 	char span[4] = "";
 	char oled_message [32] ="";
 
-	init_ADC();
-	init_DAC();
+	init_ADC(ADC1_EXAMPLE_CHANNEL);
+	init_DAC(DAC_EXAMPLE_CHANNEL);
 
 	vTaskDelay(2 * portTICK_PERIOD_MS); //2 port ticks == 1/50 sec
 
