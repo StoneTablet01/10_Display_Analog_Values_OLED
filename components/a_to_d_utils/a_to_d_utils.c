@@ -56,6 +56,10 @@ void get_span_pct_string(int adc1_channel, char* span){
   return;
 }
 
+void get_voltage_string(int adc1_channel, char* span){
+  sprintf(span,"%3.1f", get_adc_measured_voltage( adc1_channel ));
+}
+
 void output_table_header(){
   printf("  DAC Count    DAC VDC  ADC Count    ADC VDC   Span PCT"
   "   Digit[0]   Digit[1]   Digit[2]\n");

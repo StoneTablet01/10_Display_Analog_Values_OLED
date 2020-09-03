@@ -16,6 +16,8 @@ int get_span_pct_integer(int adc1_channel);
 
 void get_span_pct_string(int adc1_channel, char* span);
 
+void get_voltage_string(int adc1_channel, char* span);
+
 
 
 

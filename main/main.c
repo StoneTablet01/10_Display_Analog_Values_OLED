@@ -64,7 +64,8 @@ void app_main(void) {
 	while(1) {
 
 			set_dac_output_voltage( DAC_EXAMPLE_CHANNEL, dac_set_point );
-			get_span_pct_string(ADC1_EXAMPLE_CHANNEL,span);
+			//get_span_pct_string(ADC1_EXAMPLE_CHANNEL,span);
+			get_voltage_string(ADC1_EXAMPLE_CHANNEL,span);
 			dac_set_point++;
 
 			strcpy(oled_message, "  Stone Tablet  \n\nMoisture ");
