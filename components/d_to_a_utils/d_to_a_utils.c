@@ -20,3 +20,9 @@ void init_DAC(int dac_channel){
 
   dac_output_enable(dac_channel );
 }
+
+float dac_set_voltage(int dac_set_point){
+    float dac_output_vdc; //DAC output volts DC (0-3.3 VDC)
+    dac_output_vdc = dac_set_point * 0.01289063;
+    return dac_output_vdc;
+}
