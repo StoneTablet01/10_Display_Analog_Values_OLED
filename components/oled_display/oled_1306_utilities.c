@@ -1,3 +1,24 @@
+/**
+ * @file oled_1306_utilities.c
+ * @brief Component that handles all setup and operation of
+ * the .96 inch OLED display using I2c serial communication
+ *
+ * @author Jim Sutton
+ * @date August 24 2020
+ *
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include "esp_err.h"
@@ -6,15 +27,11 @@
 #include "oled_ssd1306.h"
 #include "font8x8_basic.h"
 
-#define tag "SSD1306"
-
-//#define SDA_PIN GPIO_NUM_21 // serial data line old value 18
-//#define SCL_PIN GPIO_NUM_22 // serial clock line old value 19
+#define tag "SSD1306     "
 
 void i2c_master_init(int sda_pin, int scl_pin){
 // This configures an i2c driver. Reference i2c driver API from Espressif
-// ESP32 supports 2 i2c connections, this will be number 0.
-
+// ESP32 supports two i2c connections, this will be number 0.
 	i2c_config_t i2c_config = {
 		.mode = I2C_MODE_MASTER,
 		.sda_io_num = sda_pin,
@@ -61,7 +78,7 @@ void ssd1306_init() {
 	// now send the commands to the SSD1306. Report result in espRc
 	espRc = i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
 	if (espRc == ESP_OK) {
-		ESP_LOGI(tag, "OLED configured successfully");
+		ESP_LOGI(tag, "OLED configured successfully\n");
 	} else {
 		ESP_LOGE(tag, "OLED configuration failed. code: 0x%.2X", espRc);
 	}
