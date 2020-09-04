@@ -1,5 +1,5 @@
-# OLED-128x64-I2C-driver-demo
-Example C program to display text on .96 inch OLED display from ESP32
+# Display_Analog_Values_OLED
+Example C program to display measured voltage on a .96 inch OLED display using ESP32 SOC
 
 ----------
 About
