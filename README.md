@@ -5,7 +5,7 @@ Example C program to display measured voltage on a .96 inch OLED display using E
 About
 ----------
 
-This sample code implement procedures to write values from an ESP32 to an 128x64 OLED display with SSD1306 driver via ESP-IDF's I2C master driver. It supports all features described in `Solomon Systech's SSD1306 datasheet`. The OLED program was initially written by Yanbe and made available through Apache 2.0 license on GITHUB. This code is available at https://github.com/yanbe/ssd1306-esp-idf-i2c . The code was altered and converted to a component to demonstrate how to use the OLED display by generating code with the Espressif development framework by Sutton and is available on GITHUB. This code is also made available under Apache 2.0 license.
+This project implements a basic digital voltmeter using an ESP32 and a OLED disply. The code implements c functions to create an output voltage by using one of the ESP32's digital to analog converter, reads the voltage just created using one of the ESP32's onboard digital to analog converters, and finaly displays the measured voltage on a 128x64 OLED display with SSD1306 driver via ESP-IDF's I2C master driver. The program uses example code from Espressif and some code for the OLED from Yanbe. As mentioned, the OLED function code was initially written by Yanbe and made available through Apache 2.0 license on GITHUB. This code is available at https://github.com/yanbe/ssd1306-esp-idf-i2c . The code in this project was substantially altered and converted to a component by Sutton. This code, as with the Espressif code and Yanbe code, is also made available under Apache 2.0 license.
 
 ----------
 For local setup
